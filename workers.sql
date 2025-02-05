@@ -64,3 +64,15 @@ WHERE employee_id = 3;
 
 DELETE FROM workers 
 WHERE employee_id = 5;
+
+
+ALTER TABLE workers 
+MODIFY email VARCHAR(50) UNIQUE ;
+
+ALTER TABLE workers 
+ADD CONSTRAINT chk_hourly_pay CHECK (hourly_pay >= 12.00);
+
+SELECT * FROM workers;
+
+INSERT INTO workers (first_name, last_name, email, hourly_pay, hire_date)
+VALUES('Steven','Dawnson','steven.d@email.com',14.00,'2023-03-15');
