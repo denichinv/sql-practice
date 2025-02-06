@@ -14,4 +14,10 @@ VALUES	('Sophia', 'Reynolds'),
 		('Ethan', 'Parker'),
         ('Olivia', 'Bennett');
         
-SELECT * FROM customers;
+SHOW INDEXES FROM customers;
+
+CREATE INDEX last_name_first_name_idx
+ON customers(last_name,first_name);
+
+SELECT * FROM customers
+WHERE last_name = 'Parker' and first_name = 'Ethan';
