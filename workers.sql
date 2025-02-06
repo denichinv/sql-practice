@@ -76,3 +76,17 @@ SELECT * FROM workers;
 
 INSERT INTO workers (first_name, last_name, email, hourly_pay, hire_date)
 VALUES('Steven','Dawnson','steven.d@email.com',14.00,'2023-03-15');
+
+ALTER TABLE workers 
+ADD COLUMN job VARCHAR(25) AFTER hourly_pay;
+
+UPDATE workers
+SET job = "manager" 
+WHERE employee_id = 3;
+
+
+SELECT * 
+FROM workers
+WHERE hire_date < '2024-01-10' AND job = "manager";
+
+
