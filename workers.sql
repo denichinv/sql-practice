@@ -120,3 +120,17 @@ WHERE hourly_pay > (SELECT AVG(hourly_pay) FROM workers);
 SELECT SUM(hourly_pay) AS 'hourly pay', employee_id 
 FROM workers
 GROUP BY employee_id WITH ROLLUP;
+
+-- Ensure the 'salary' column is positioned correctly and stores monetary values accurately  
+ALTER TABLE workers  
+ADD COLUMN salary DECIMAL (10,2) AFTER hourly_pay;  
+
+-- Populate the new 'salary' column with initial values based on the standard yearly hours (40h/week * 52 weeks)  
+UPDATE workers  
+SET salary = hourly_pay * 2080;   
+
+-- Automatically adjust 'salary' whenever 'hourly_pay' is updated to maintain consistency  
+CREATE TRIGGER before_hourly_pay_update  
+BEFORE UPDATE ON workers  
+FOR EACH ROW   
+SET NEW.salary = (NEW.hourly_pay * 2080);  
